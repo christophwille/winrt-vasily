@@ -4,3 +4,16 @@ obj
 
 # mstest test results
 TestResults
+
+#Tooling
+_ReSharper*/
+*.resharper
+[Tt]est[Rr]esult*
+
+*.user
+*.suo
+
+# Ignore everything that has to do with the Store
+AppPackages/
+Station366_StoreKey.pfx
+Package.StoreAssociation.xml
