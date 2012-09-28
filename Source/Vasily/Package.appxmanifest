@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="c05d5d68-bcda-4451-8cb4-6eaa0496a063" Publisher="CN=christophw" Version="1.0.0.0" />
+  <Properties>
+    <DisplayName>Vasily</DisplayName>
+    <PublisherDisplayName>christophw</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Vasily.App">
+      <VisualElements DisplayName="Vasily" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Check connectivity to services on remote servers. This is like ping, but more specialized as it doesn't only test whether the server is reachable, but checks whether a specific service is listening (ie Web Server)" ForegroundText="light" BackgroundColor="#464646">
+        <DefaultTile ShowName="allLogos" />
+        <SplashScreen Image="Assets\SplashScreen.png" />
+      </VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>
