@@ -121,10 +121,13 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Favorite.cs" />
+    <Compile Include="Models\FavoritesRepository.cs" />
     <Compile Include="Models\MainPageState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThirdParty\ExtendedTextBox.cs" />
     <Compile Include="ThirdParty\SerializationHelper.cs" />
+    <Compile Include="ThirdParty\StorageHelper.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

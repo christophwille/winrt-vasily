@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,11 @@ namespace Vasily.ViewModels
         public const string DefaultHostnamePlaceholder = "hostnamehere";
 
         public MainPageViewModel()
+        {
+            SetDefaults();
+        }
+
+        private void SetDefaults()
         {
             HostName = DefaultHostnamePlaceholder;
             PortNumber = "80";
@@ -77,6 +83,7 @@ namespace Vasily.ViewModels
             }
         }
 
+        public const string CanConnectPropertyName = "CanConnect";
         public bool CanConnect
         {
             get
@@ -100,6 +107,7 @@ namespace Vasily.ViewModels
             set
             {
                 Set(HostNamePropertyName, ref _hostName, value);
+                RaisePropertyChanged(CanConnectPropertyName);
                 ConnectCommand.RaiseCanExecuteChanged();
             }
         }
@@ -120,6 +128,7 @@ namespace Vasily.ViewModels
             set
             {
                 Set(PortNumberPropertyName, ref _portNumber, value);
+                RaisePropertyChanged(CanConnectPropertyName);
                 ConnectCommand.RaiseCanExecuteChanged();
             }
         }
@@ -170,6 +179,13 @@ namespace Vasily.ViewModels
             }
         }
 
+        public async Task LoadFavorites()
+        {
+            var repo = new FavoritesRepository();
+            var items = await repo.LoadAsync();
+            Favorites = new ObservableCollection<Favorite>(items);
+        }
+
         public MainPageState SaveState()
         {
             var state = new MainPageState()
@@ -179,6 +195,96 @@ namespace Vasily.ViewModels
             };
 
             return state;
+        }
+
+        public const string SelectedFavoritePropertyName = "SelectedFavorite";
+        private Favorite _selectedFavorite= null;
+        public Favorite SelectedFavorite
+        {
+            get { return _selectedFavorite; }
+            set
+            {
+                Set(SelectedFavoritePropertyName, ref _selectedFavorite, value);
+
+                if (null == _selectedFavorite)
+                {
+                    SetDefaults();
+                }
+                else
+                {
+                    HostName = _selectedFavorite.HostName;
+                    PortNumber = _selectedFavorite.PortNumber;
+                }
+
+                DeleteSelectedItemCommand.RaiseCanExecuteChanged();
+                RaisePropertyChanged(IsFavoriteSelectedPropertyName);
+            }
+        }
+
+        public const string IsFavoriteSelectedPropertyName = "IsFavoriteSelected";
+        public bool IsFavoriteSelected
+        {
+            get { return _selectedFavorite != null; }
+        }
+
+        private RelayCommand _deleteSelectedItemCommand;
+        public RelayCommand DeleteSelectedItemCommand
+        {
+            get
+            {
+                return _deleteSelectedItemCommand
+                    ?? (_deleteSelectedItemCommand = new RelayCommand(
+                        async () => await DeleteSelectedItemAsync(),
+                        () => SelectedFavorite != null));
+            }
+        }
+
+        public async Task DeleteSelectedItemAsync()
+        {
+            Favorites.Remove(SelectedFavorite);
+
+            var repo = new FavoritesRepository();
+            bool saveOk = await repo.SaveAsync(Favorites.ToList());
+        }
+
+        public const string FavoritesPropertyName = "Favorites";
+        private ObservableCollection<Favorite> _favorites = new ObservableCollection<Favorite>();
+        public ObservableCollection<Favorite> Favorites
+        {
+            get
+            {
+                return _favorites;
+            }
+            set
+            {
+                Set(FavoritesPropertyName, ref _favorites, value);
+            }
+        }
+
+        private RelayCommand _addItemCommand;
+        public RelayCommand AddItemCommand
+        {
+            get
+            {
+                return _addItemCommand
+                    ?? (_addItemCommand = new RelayCommand(
+                        async () => await AddItemAsync(),
+                        () => CanConnect));
+            }
+        }
+
+        public async Task AddItemAsync()
+        {
+            var newItem = new Favorite()
+                              {
+                                  HostName = this.HostName,
+                                  PortNumber = this.PortNumber
+                              };
+
+            Favorites.Add(newItem);
+
+            var repo = new FavoritesRepository();
+            bool saveOk = await repo.SaveAsync(Favorites.ToList());
         }
     }
 }

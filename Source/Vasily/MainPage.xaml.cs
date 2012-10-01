@@ -49,6 +49,8 @@ namespace Vasily
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
+            ViewModel.LoadFavorites();
+
             if (pageState != null && pageState.ContainsKey(Constants.MainPageState))
             {
                 string serializedState = pageState[Constants.MainPageState].ToString();
