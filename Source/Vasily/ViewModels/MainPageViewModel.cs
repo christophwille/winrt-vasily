@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 using Windows.Networking.Sockets;
+using Vasily.Models;
 
 namespace Vasily.ViewModels
 {
@@ -155,6 +156,29 @@ namespace Vasily.ViewModels
                 Set(ConnectionAttemptInformationPropertyName, ref _resultInformation, value);
             }
         }
-        
+
+        public void LoadState(MainPageState state)
+        {
+            if (!String.IsNullOrWhiteSpace(state.HostName))
+            {
+                HostName = state.HostName;
+            }
+
+            if (!String.IsNullOrWhiteSpace(state.PortNumber))
+            {
+                PortNumber = state.PortNumber;
+            }
+        }
+
+        public MainPageState SaveState()
+        {
+            var state = new MainPageState()
+            {
+                HostName = this.HostName,
+                PortNumber = this.PortNumber
+            };
+
+            return state;
+        }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using GalaSoft.MvvmLight;
+using Vasily.Models;
+using Vasily.ThirdParty;
 using Vasily.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -47,6 +49,13 @@ namespace Vasily
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
+            if (pageState != null && pageState.ContainsKey(Constants.MainPageState))
+            {
+                string serializedState = pageState[Constants.MainPageState].ToString();
+                var state = SerializationHelper.DeserializeFromString<MainPageState>(serializedState);
+
+                ViewModel.LoadState(state);
+            }
         }
 
         /// <summary>
@@ -57,6 +66,8 @@ namespace Vasily
         /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
+            string serializedState = SerializationHelper.SerializeToString(ViewModel.SaveState());
+            pageState[Constants.MainPageState] = serializedState;
         }
 
         private void HostNameTextBox_GotFocus(object sender, RoutedEventArgs e)

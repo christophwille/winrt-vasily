@@ -10,5 +10,7 @@ namespace Vasily
     {
         public const string SupportUrl = "https://github.com/christophwille/winrt-vasily";
         public const string PrivacyPolicyUrl = "https://github.com/christophwille/winrt-vasily/wiki/Privacy-Policy";
+
+        public const string MainPageState = "MainPageState";
     }
 }

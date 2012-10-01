@@ -8,5 +8,7 @@ namespace Vasily.Models
 {
     public class MainPageState
     {
+        public string HostName { get; set; }
+        public string PortNumber { get; set; }
     }
 }
