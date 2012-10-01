@@ -57,7 +57,7 @@
                                                 CustomAction="{Binding UpdateBoundHostNameProperty, Mode=OneTime}"
                                                 Text="{Binding HostName, Mode=TwoWay}" 
                                                 Width="250"
-                                                Margin="5,5,5,5">
+                                                Margin="5,5,5,5" GotFocus="HostNameTextBox_GotFocus">
             </ThirdParty:ExtendedTextBox>
 
             <TextBlock Grid.Row="0" Grid.Column="2" Text="Port:"  Margin="5,5,5,5" Style="{StaticResource ItemTextStyle}"/>

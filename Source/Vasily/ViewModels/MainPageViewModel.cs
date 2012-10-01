@@ -11,9 +11,11 @@ namespace Vasily.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+        public const string DefaultHostnamePlaceholder = "hostnamehere";
+
         public MainPageViewModel()
         {
-            HostName = "www.alphasierrapapa.com";
+            HostName = DefaultHostnamePlaceholder;
             PortNumber = "80";
         }
 

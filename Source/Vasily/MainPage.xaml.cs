@@ -58,5 +58,15 @@ namespace Vasily
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
         }
+
+        private void HostNameTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            string text = HostNameTextBox.Text;
+
+            if (0 == String.Compare(text, MainPageViewModel.DefaultHostnamePlaceholder, StringComparison.OrdinalIgnoreCase))
+            {
+                HostNameTextBox.SelectAll();
+            }
+        }
     }
 }
