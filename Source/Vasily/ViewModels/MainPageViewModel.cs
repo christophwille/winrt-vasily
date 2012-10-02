@@ -92,6 +92,7 @@ namespace Vasily.ViewModels
                 return 
                     !ConnectionInProgress && 
                     HostName.Trim().Length >= 3 && 
+                    0 != String.Compare(DefaultHostnamePlaceholder, HostName, StringComparison.OrdinalIgnoreCase) && 
                     Int32.TryParse(PortNumber, out portNumber);
             }
         }
@@ -109,6 +110,7 @@ namespace Vasily.ViewModels
                 Set(HostNamePropertyName, ref _hostName, value);
                 RaisePropertyChanged(CanConnectPropertyName);
                 ConnectCommand.RaiseCanExecuteChanged();
+                AddItemCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -130,6 +132,7 @@ namespace Vasily.ViewModels
                 Set(PortNumberPropertyName, ref _portNumber, value);
                 RaisePropertyChanged(CanConnectPropertyName);
                 ConnectCommand.RaiseCanExecuteChanged();
+                AddItemCommand.RaiseCanExecuteChanged();
             }
         }
 
