@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="ChristophWille.Vasily" Publisher="CN=C7672E4A-2AFC-41B8-87FD-CBC3978C49C6" Version="1.1.0.0" />
+  <Identity Name="ChristophWille.Vasily" Publisher="CN=C7672E4A-2AFC-41B8-87FD-CBC3978C49C6" Version="1.1.0.1" />
   <Properties>
     <DisplayName>Vasily</DisplayName>
     <PublisherDisplayName>Christoph Wille</PublisherDisplayName>

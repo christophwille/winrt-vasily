@@ -169,6 +169,13 @@ namespace Vasily.ViewModels
             }
         }
 
+        public async Task LoadFavorites()
+        {
+            var repo = new FavoritesRepository();
+            var items = await repo.LoadAsync();
+            Favorites = new ObservableCollection<Favorite>(items);
+        }
+
         public void LoadState(MainPageState state)
         {
             if (!String.IsNullOrWhiteSpace(state.HostName))
@@ -180,13 +187,6 @@ namespace Vasily.ViewModels
             {
                 PortNumber = state.PortNumber;
             }
-        }
-
-        public async Task LoadFavorites()
-        {
-            var repo = new FavoritesRepository();
-            var items = await repo.LoadAsync();
-            Favorites = new ObservableCollection<Favorite>(items);
         }
 
         public MainPageState SaveState()
