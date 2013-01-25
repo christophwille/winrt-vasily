@@ -15,5 +15,5 @@ _ReSharper*/
 
 # Ignore everything that has to do with the Store
 AppPackages/
-Station366_StoreKey.pfx
+Vasily_StoreKey.pfx
 Package.StoreAssociation.xml
