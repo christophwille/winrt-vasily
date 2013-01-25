@@ -8,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -102,6 +103,13 @@ namespace Vasily
 
         void OnCommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
         {
+            var c = new Color()
+            {
+                R = 46,
+                G = 46,
+                B = 46
+            };
+
             // Add an About command
             var about = new SettingsCommand("about",
                 "About",
@@ -110,6 +118,7 @@ namespace Vasily
                     var settings = new SettingsFlyout();
                     settings.Content = new About();
                     settings.HeaderText = "About";
+                    settings.ContentBackgroundBrush = new SolidColorBrush(c);
                     settings.IsOpen = true;
                 });
 
