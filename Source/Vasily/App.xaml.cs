@@ -115,7 +115,7 @@ namespace Vasily
                 "About",
                 (handler) =>
                 {
-                    var settings = new SettingsFlyout();
+                    var settings = new Callisto.Controls.SettingsFlyout();
                     settings.Content = new About();
                     settings.HeaderText = "About";
                     settings.ContentBackgroundBrush = new SolidColorBrush(c);
